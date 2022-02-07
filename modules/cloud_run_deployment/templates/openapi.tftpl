@@ -1,0 +1,65 @@
+swagger: '2.0'
+info:
+  title: ${env}_ibe_lbme_img_proc_api
+  description: Image proccessing API
+  version: 1.0.0
+schemes:
+  - https
+produces:
+  - application/json
+paths:
+  /images:
+    post:
+      summary: Upload a new Image
+      operationId: uploadimages
+      consumes:
+        - multipart/form-data
+      x-google-backend:
+        address: ${image_api_container_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        '200':
+          description: OK
+    get:
+      summary: Get all images
+      operationId: getImages
+      x-google-backend:
+        address: ${image_api_container_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        '200':
+          description: OK
+  /images/{id}:
+    post:
+      summary: Modify an Image
+      operationId: modifyImage
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      x-google-backend:
+        address: ${image_api_container_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        '200':
+          description: OK
+    get:
+      summary: Get an image
+      operationId: getImage
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+      x-google-backend:
+        address: ${image_api_container_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        '200':
+          description: OK
+securityDefinitions:
+    api_key:
+      type: "apiKey"
+      name: "key"
+      in: "query"
