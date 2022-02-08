@@ -25,6 +25,19 @@ variable containers {
 
 }
 
+variable container_frontend{
+    type = object({
+        name       = string,
+        version    = string,
+        repository = string, 
+        env        = list(object({
+            name  = optional(string),
+            value = optional(string)
+        }))
+    })
+
+}
+
 variable location {
     type = string
     description = "location to deploy resources"

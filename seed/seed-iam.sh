@@ -12,6 +12,7 @@ gcloud services enable run.googleapis.com
 gcloud services enable containerregistry.googleapis.com
 gcloud services enable iam.googleapis.com
 gcloud services enable compute.googleapis.com
+gcloyd services enable cloudresourcemanager.googleapis.com
 
 gsutil mb -p $PROJECT_ID gs://$ENVIRONMENT-statefiles-$PROJECT_ID
 
@@ -35,4 +36,10 @@ gcloud projects add-iam-policy-binding $PROJECT_ID \
 
 gcloud projects add-iam-policy-binding $PROJECT_ID \
     --member="serviceAccount:$ENVIRONMENT-iac-tf-sa@$PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/iam.securityAdmin"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:$ENVIRONMENT-iac-tf-sa@$PROJECT_ID.iam.gserviceaccount.com" \
     --role="roles/compute.admin"
+
+    

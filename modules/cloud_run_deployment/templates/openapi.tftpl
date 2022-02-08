@@ -8,6 +8,23 @@ schemes:
 produces:
   - application/json
 paths:
+  /images/{image_id}/publish
+    post:
+      summary: Make an Image public
+      operationId: makeimagepublic
+      parameters:
+        - name: image_id
+          in: path
+          required: true
+          type: string
+      consumes:
+        - multipart/form-data
+      x-google-backend:
+        address: ${image_api_container_url}
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        '200':
+          description: OK
   /images:
     post:
       summary: Upload a new Image
@@ -29,26 +46,12 @@ paths:
       responses:
         '200':
           description: OK
-  /images/{id}:
-    post:
-      summary: Modify an Image
-      operationId: modifyImage
-      parameters:
-        - name: id
-          in: path
-          required: true
-          type: string
-      x-google-backend:
-        address: ${image_api_container_url}
-        path_translation: APPEND_PATH_TO_ADDRESS
-      responses:
-        '200':
-          description: OK
+  /images/user/{user_id}:
     get:
-      summary: Get an image
-      operationId: getImage
+      summary: get Image by user
+      operationId: getimagebyuser
       parameters:
-        - name: id
+        - name: user_id
           in: path
           required: true
           type: string
