@@ -21,7 +21,7 @@ resource "google_project_iam_member" "deployer_binding_storage" {
     project = var.project_id
     role    = "roles/storage.admin"
 
-    members = "serviceAccount:${google_service_account.deployer_sa.email}"
+    member = "serviceAccount:${google_service_account.deployer_sa.email}"
 }
 
 resource "google_project_iam_member" "deployer_binding_cloudrun" {
