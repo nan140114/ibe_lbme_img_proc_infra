@@ -1,7 +1,14 @@
-resource "google_storage_bucket_access_control" "public_rule" {
+# resource "google_storage_bucket_access_control" "public_rule" {
+#   bucket = google_storage_bucket.images_public_bucket.name
+#   role   = "roles/storage.objectViewer"
+#   entity = "allUsers"
+# }
+resource "google_storage_bucket_iam_binding" "allow_all_user_" {
   bucket = google_storage_bucket.images_public_bucket.name
-  role   = "READER"
-  entity = "allUsers"
+  role = "roles/storage.objectViewer"
+  members = [
+    "allUsers",
+  ]
 }
 
 resource "google_storage_bucket" "images_public_bucket" {
