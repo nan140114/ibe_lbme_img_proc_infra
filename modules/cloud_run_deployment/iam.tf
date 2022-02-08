@@ -14,45 +14,35 @@ resource "google_project_iam_member" "deployer_binding" {
     project = var.project_id
     role    = "roles/artifactregistry.admin"
 
-    members = [
-        "serviceAccount:${google_service_account.deployer_sa.email}",
-    ]
+    member = "serviceAccount:${google_service_account.deployer_sa.email}"
 }
 
 resource "google_project_iam_member" "deployer_binding_storage" {
     project = var.project_id
     role    = "roles/storage.admin"
 
-    members = [
-        "serviceAccount:${google_service_account.deployer_sa.email}",
-    ]
+    members = "serviceAccount:${google_service_account.deployer_sa.email}"
 }
 
 resource "google_project_iam_member" "deployer_binding_cloudrun" {
     project = var.project_id
     role    = "roles/run.developer"
 
-    members = [
-        "serviceAccount:${google_service_account.deployer_sa.email}",
-    ]
+    member = "serviceAccount:${google_service_account.deployer_sa.email}"
 }
 
 resource "google_project_iam_member" "cloudrun_pubsub_invoker_cloudrun_binding" {
     project = var.project_id
     role    = "roles/run.invoker"
 
-    members = [
-        "serviceAccount:${google_service_account.cloudrun_pubsub_invoker.email}",
-    ]
+    member = "serviceAccount:${google_service_account.cloudrun_pubsub_invoker.email}"
 }
 
 resource "google_project_iam_member" "pubsub_default_token_binding" {
     project = var.project_id
     role    = "roles/iam.serviceAccountTokenCreator"
 
-    members = [
-        "serviceAccount:${local.default_pubsub_sa}",
-    ]
+    member = "serviceAccount:${local.default_pubsub_sa}"
 }
 
 data "google_compute_default_service_account" "default" {
