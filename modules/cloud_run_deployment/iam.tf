@@ -10,7 +10,7 @@ resource "google_service_account" "cloudrun_pubsub_invoker" {
     display_name = "Service Account to invoke the verification cloud run service when a object is uploaded to a bucket"
 }
 
-resource "google_project_iam_binding" "deployer_binding" {
+resource "google_project_iam_member" "deployer_binding" {
     project = var.project_id
     role    = "roles/artifactregistry.admin"
 
@@ -19,7 +19,7 @@ resource "google_project_iam_binding" "deployer_binding" {
     ]
 }
 
-resource "google_project_iam_binding" "deployer_binding_storage" {
+resource "google_project_iam_member" "deployer_binding_storage" {
     project = var.project_id
     role    = "roles/storage.admin"
 
@@ -28,7 +28,7 @@ resource "google_project_iam_binding" "deployer_binding_storage" {
     ]
 }
 
-resource "google_project_iam_binding" "deployer_binding_cloudrun" {
+resource "google_project_iam_member" "deployer_binding_cloudrun" {
     project = var.project_id
     role    = "roles/run.developer"
 
@@ -37,7 +37,7 @@ resource "google_project_iam_binding" "deployer_binding_cloudrun" {
     ]
 }
 
-resource "google_project_iam_binding" "cloudrun_pubsub_invoker_cloudrun_binding" {
+resource "google_project_iam_member" "cloudrun_pubsub_invoker_cloudrun_binding" {
     project = var.project_id
     role    = "roles/run.invoker"
 
@@ -46,7 +46,7 @@ resource "google_project_iam_binding" "cloudrun_pubsub_invoker_cloudrun_binding"
     ]
 }
 
-resource "google_project_iam_binding" "pubsub_default_token_binding" {
+resource "google_project_iam_member" "pubsub_default_token_binding" {
     project = var.project_id
     role    = "roles/iam.serviceAccountTokenCreator"
 
