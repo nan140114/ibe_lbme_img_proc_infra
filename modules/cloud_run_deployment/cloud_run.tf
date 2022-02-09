@@ -18,6 +18,9 @@ resource "google_cloud_run_service" "containers" {
             
             }
         }
+        annotations = {
+            "autoscaling.knative.dev/maxScale"      = "10"
+        }
     }
     autogenerate_revision_name = true
     traffic {
@@ -61,9 +64,13 @@ resource "google_cloud_run_service" "container_frontend" {
                       value = env.value.value
                   }
                 }
-            
             }
         }
+        metadata {
+        annotations = {
+            "autoscaling.knative.dev/maxScale"      = "10"
+        }
+    }
     }
     autogenerate_revision_name = true
     traffic {
